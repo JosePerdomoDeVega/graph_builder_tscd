@@ -1,0 +1,4 @@
+boto3
+logfire
+pydantic-settings
+neo4j

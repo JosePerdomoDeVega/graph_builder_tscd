@@ -28,6 +28,7 @@ class Neo4jGraphBuilder(GraphBuilderInterface):
 
     @override
     def build_graph(self, words: List[str]):
+        edges = 0
         try:
             with self.driver.session() as session:
                 for word in words:
@@ -43,6 +44,7 @@ class Neo4jGraphBuilder(GraphBuilderInterface):
                                 """,
                                 w1=word1, w2=word2
                             )
+                            edges += 1
         except Exception as e:
-            logger.error(f"Error while building graph", error=str(e))
-        logger.info(f"Graph successfully built with {len(words)} words")
+            logger.error("Error while building graph", error=str(e))
+        logger.info(f"Graph successfully built with {len(words)} nodes and {edges} edges")

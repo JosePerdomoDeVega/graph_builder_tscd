@@ -69,4 +69,4 @@ jobs:
             sudo docker compose pull
             sudo docker compose up -d
             sudo docker image prune -f
-            docker run --rm graph_builder python main.py
+            sudo docker run --rm graph_builder python main.py

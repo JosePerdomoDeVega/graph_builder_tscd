@@ -1,9 +1,12 @@
-FROM neo4j:5.14
+FROM python:3.12
 
-EXPOSE 7474 7687
+WORKDIR /app
 
-ENV NEO4J_AUTH=neo4j/passwordtest1
+RUN apt-get update && apt-get install -y \
+    build-essential curl \
+    && rm -rf /var/lib/apt/lists/*
 
-ENV SERVER_MEMORY_PAGECACHE_SIZE=2G
-ENV SERVER_MEMORY_HEAP_INITIAL_SIZE=2G
-ENV SERVER_MEMORY_HEAP_MAX_SIZE=3G
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
